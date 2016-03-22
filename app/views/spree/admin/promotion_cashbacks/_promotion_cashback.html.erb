@@ -1,0 +1,12 @@
+<tr data-hook="adjustment_row">
+  <td><%= promotion_cashback.promotion_action_type %></td>
+  <td><%= promotion_cashback.promotion_action.type %></td>
+  <td class="text-center"><%= promotion_cashback.promotion_action.calculator.compute(promotion_cashback.order).to_f %></td>
+  <td class="text-center"><span class="label label-<%= promotion_cashback.state %>" data-hook="<%= promotion_cashback.id %>"><%= promotion_cashback.state %></td>
+  <td class="actions actions-2 text-center" data-hook="<%= promotion_cashback.id %>">
+    <% if promotion_cashback.state == 'pending' %>
+      <%= link_to('accept', change_state_admin_order_promotion_cashback_path(promotion_cashback.order.number, promotion_cashback, accept: true), remote: true, method: :put) if can?(:edit, promotion_cashback) %>
+      <%= link_to('reject', change_state_admin_order_promotion_cashback_path(promotion_cashback.order.number, promotion_cashback), remote: true, method: :put) if can?(:delete, promotion_cashback) %>
+    <% end %>
+  </td>
+</tr>

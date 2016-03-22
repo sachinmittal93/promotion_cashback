@@ -1,0 +1,18 @@
+<div class="panel-heading">
+  <h3 class="panel-title"><%= Spree.t(:promotion_cashbacks) %></h3>
+</div>
+
+<table class="table table-bordered promotion_cashbacks" data-hook="promotion_cashbacks">
+  <thead data-hook="promotion_cashback_head">
+    <tr>
+      <th><%= Spree.t(:type) %></th>
+      <th><%= Spree.t(:action_type) %></th>
+      <th class="text-center"><%= Spree.t(:amount) %></th>
+      <th class="text-center"><%= Spree.t(:state) %></th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "promotion_cashback", collection: @promotion_cashbacks %>
+  </tbody>
+</table>

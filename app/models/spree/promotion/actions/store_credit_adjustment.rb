@@ -2,19 +2,16 @@ module Spree
   class Promotion
     module Actions
       class StoreCreditAdjustment < Spree::PromotionAction
+
         include Spree::CalculatedAdjustments
+
+        has_many :promotion_cashbacks, class_name: 'Spree::PromotionCashback', as: :promotion_action, dependent: :destroy
 
         before_validation -> { self.calculator ||= Calculator::FlatPercentItemTotal.new }
 
         def perform(payload = {})
           order = payload[:order]
-          Spree::StoreCredit.new(
-            user: order.user,
-            created_by: order.user,
-            category_id: 1,
-            currency: order.currency,
-            amount: calculator.compute(order).to_f
-          ).save
+          !!order.promotion_cashbacks.create(promotion_action: self)
         end
       end
     end

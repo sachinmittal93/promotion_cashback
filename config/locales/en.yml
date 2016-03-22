@@ -26,3 +26,4 @@ en:
       store_credit_adjustment:
         description: Creates a StoreCredit adjustment as per defined rules.
         name: Create StoreCredit adjustment
+    promotion_cashbacks: Promotion Cashbacks

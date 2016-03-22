@@ -1,0 +1,2 @@
+$('td[data-hook="<%= @promotion_cashback.id %>"]').html('');
+$('td span[data-hook="<%= @promotion_cashback.id %>"]').html("<%= @promotion_cashback.state %>").addClass("label-<%= @promotion_cashback.state %>");
