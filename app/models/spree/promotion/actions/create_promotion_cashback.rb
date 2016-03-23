@@ -1,7 +1,7 @@
 module Spree
   class Promotion
     module Actions
-      class StoreCreditAdjustment < Spree::PromotionAction
+      class CreatePromotionCashback < Spree::PromotionAction
 
         include Spree::CalculatedAdjustments
 
@@ -12,6 +12,10 @@ module Spree
         def perform(payload = {})
           order = payload[:order]
           !!order.promotion_cashbacks.create(promotion_action: self)
+        end
+
+        def compute_amount(order)
+          calculator.compute(order)
         end
       end
     end

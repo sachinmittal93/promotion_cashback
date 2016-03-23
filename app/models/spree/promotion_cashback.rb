@@ -19,7 +19,7 @@ module Spree
         transition from: :pending, to: :canceled
       end
 
-      before_transition to: :completed, do: :add_store_credits
+      before_transition to: :completed, do: :add_promotion_cashback
 
       after_transition do |promotion_cashback, transition|
         promotion_cashback.state_changes.create!(
@@ -31,13 +31,13 @@ module Spree
 
     end
 
-    def add_store_credits
+    def add_promotion_cashback
       Spree::StoreCredit.create(
             user: order.user,
             created_by: order.user,
             category_id: 1,
             currency: order.currency,
-            amount: promotion_action.calculator.compute(order)
+            amount: promotion_action.compute_amount(order)
           )
     end
   end

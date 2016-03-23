@@ -16,3 +16,12 @@ Spree.config do |config|
 end
 
 Spree.user_class = "Spree::LegacyUser"
+Rails.application.config.after_initialize do
+  Rails.application.config.spree.promotions.actions << Spree::Promotion::Actions::CreatePromotionCashback
+  Rails.application.config.spree.calculators.add_class('promotion_actions_create_promotion_cashbacks')
+  Rails.application.config.spree.calculators.promotion_actions_create_promotion_cashbacks = [
+    Spree::Calculator::FlatPercentItemTotal,
+    Spree::Calculator::FlatRate,
+    Spree::Calculator::FlexiRate
+  ]
+end

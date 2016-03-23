@@ -23,7 +23,6 @@ en:
   hello: "Hello world"
   spree:
     promotion_action_types:
-      store_credit_adjustment:
-        description: Creates a StoreCredit adjustment as per defined rules.
-        name: Create StoreCredit adjustment
-    promotion_cashbacks: Promotion Cashbacks
+      create_promotion_cashback:
+        description: Creates a PromotionCashback as per defined rules.
+        name: Create PromotionCashback
