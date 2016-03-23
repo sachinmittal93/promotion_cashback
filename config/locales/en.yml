@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  spree:
+    promotion_action_types:
+      create_promotion_cashback:
+        description: Creates a PromotionCashback as per defined rules.
+        name: Create PromotionCashback

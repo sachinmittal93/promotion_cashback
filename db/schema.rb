@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317073154) do
+ActiveRecord::Schema.define(version: 20160321105241) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -460,6 +460,17 @@ ActiveRecord::Schema.define(version: 20160317073154) do
   add_index "spree_promotion_actions", ["deleted_at"], name: "index_spree_promotion_actions_on_deleted_at"
   add_index "spree_promotion_actions", ["id", "type"], name: "index_spree_promotion_actions_on_id_and_type"
   add_index "spree_promotion_actions", ["promotion_id"], name: "index_spree_promotion_actions_on_promotion_id"
+
+  create_table "spree_promotion_cashbacks", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "promotion_action_id"
+    t.string   "promotion_action_type"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "state",                 default: "pending"
+  end
+
+  add_index "spree_promotion_cashbacks", ["order_id"], name: "index_spree_promotion_cashbacks_on_order_id"
 
   create_table "spree_promotion_categories", force: :cascade do |t|
     t.string   "name"

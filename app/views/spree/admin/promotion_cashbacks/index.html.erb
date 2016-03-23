@@ -1,0 +1,34 @@
+<%= render partial: 'spree/admin/shared/order_tabs', locals: { current: :promotion_cashbacks} %>
+
+<% content_for :page_title do %>
+   / <%= plural_resource_name(Spree::PromotionCashback) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to(Spree.t(:new_promotion_cashback), new_admin_order_promotion_cashback_url(@order), class: "btn-success", icon: 'add') if can? :create, Spree::PromotionCashback %>
+<% end %>
+
+<% if @promotion_cashbacks.present? %>
+  <div class="panel panel-default">
+    <%= render partial: 'promotion_cashbacks_table' %>
+  </div>
+<% else %>
+  <div class="alert alert-warning">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::PromotionCashback)) %>
+  </div>
+<% end %>
+
+<% if @order.can_add_coupon? %>
+  <div class="well" data-hook="promotion_cashbacks_new_coupon_code">
+    <div class="form-group">
+      <%= text_field_tag "coupon_code", "", placeholder: Spree.t(:coupon_code), class: "form-control" %>
+    </div>
+    <%= button Spree.t(:add_coupon_code), 'plus', 'submit', id: "add_coupon_code" %>
+  </div>
+<% end %>
+
+<%= javascript_tag do %>
+  var order_number = '<%= @order.number %>';
+<% end %>
+
+<%= render partial: 'spree/admin/shared/order_summary' %>
